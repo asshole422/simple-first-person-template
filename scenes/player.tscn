@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://brpt71jl5cg2q"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_yofdb"]
+[ext_resource type="PackedScene" uid="uid://c6wmqp0buuk5m" path="res://scenes/PlayerGUI.tscn" id="2_ywley"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jse87"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p0oft"]
+radius = 0.149786
+height = 0.601342
+
+[sub_resource type="Animation" id="Animation_fnymu"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.468065, 0)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("head/Camera3D:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(75, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_nuoua"]
+resource_name = "crouch"
+length = 0.5
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.466667, 1, 1, 0.495, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.468065, 0, 0.5, 1, 0, 0.35887, 0)
+
+[sub_resource type="Animation" id="Animation_px50k"]
+resource_name = "sprint"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head/Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(75, -0.25, 0, 0.25, 0, 95.8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_auuwx"]
+_data = {
+"RESET": SubResource("Animation_fnymu"),
+"crouch": SubResource("Animation_nuoua"),
+"sprint": SubResource("Animation_px50k")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_yofdb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.295367, 0)
+mesh = SubResource("CapsuleMesh_jse87")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.294392, 0)
+shape = SubResource("CapsuleShape3D_p0oft")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468065, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0026046, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="head"]
+target_position = Vector3(0, 0, -0.91)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="PlayerGUI" parent="." instance=ExtResource("2_ywley")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_auuwx")
+}

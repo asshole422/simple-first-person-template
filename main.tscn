@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://piq1qo6dhgdh"]
+
+[ext_resource type="PackedScene" uid="uid://brpt71jl5cg2q" path="res://scenes/player.tscn" id="1_8teri"]
+[ext_resource type="Texture2D" uid="uid://ya235vbyvsuk" path="res://test_scene_assets/fakepngcat.png" id="2_87uvm"]
+[ext_resource type="Script" path="res://test_scene_assets/ButtonInteractible.gd" id="2_dgpk1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2q4g"]
+sky_top_color = Color(0.371817, 5.62528e-07, 9.62615e-08, 1)
+sky_horizon_color = Color(0.697213, 0.5, 0.52749, 1)
+sky_energy_multiplier = 0.85
+ground_bottom_color = Color(0.417035, 0, 0.109961, 1)
+ground_horizon_color = Color(0.697213, 0.5, 0.52749, 1)
+
+[sub_resource type="Sky" id="Sky_6brtm"]
+sky_material = SubResource("ProceduralSkyMaterial_e2q4g")
+
+[sub_resource type="Environment" id="Environment_qbkgc"]
+background_mode = 2
+sky = SubResource("Sky_6brtm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjcof"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_52idf"]
+size = Vector3(0.272949, 0.172974, 0.234375)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gkoj"]
+albedo_texture = ExtResource("2_87uvm")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vcox7"]
+material = SubResource("StandardMaterial3D_6gkoj")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_8teri")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48323, 0)
+
+[node name="TestPlace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.485046, 0.712285, 0.156724)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="TestPlace"]
+environment = SubResource("Environment_qbkgc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114594, 0, 2.65455)
+use_collision = true
+size = Vector3(3.93793, 1, 11.9994)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114594, 0.621386, -2.90825)
+use_collision = true
+size = Vector3(3.93793, 0.24115, 0.873812)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31979, 0.773056, -2.74449)
+use_collision = true
+size = Vector3(0.201775, 0.0473022, 0.202767)
+material = SubResource("StandardMaterial3D_yjcof")
+
+[node name="Interactible3D" type="Area3D" parent="TestPlace/CSGBox3D3"]
+script = ExtResource("2_dgpk1")
+InteractText = "Press [E] to summon cool ass cat"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestPlace/CSGBox3D3/Interactible3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0178223, 0.0786743, 0.0214844)
+shape = SubResource("BoxShape3D_52idf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, 0.849479, 0.527623, 0, -0.527623, 0.849479, 0, 3.38979, 3.26035)
+light_color = Color(0.585847, 1.8049e-06, 4.33177e-07, 1)
+light_energy = 3.101
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, -0.774072, 0.633097, 0, -0.633097, -0.774072, 0, 3.38979, -1.66433)
+light_color = Color(1, 0.592798, 0.532572, 1)
+light_energy = 1.97
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestPlace"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.156692, 1.68591, -3.2028)
+visible = false
+mesh = SubResource("PlaneMesh_vcox7")
