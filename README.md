@@ -1,17 +1,21 @@
 # Simple First Person Game template
 
-A really simple first person game template, that contains extremely basic stuff.
+A really simple first person game template, that contains really basic stuff.
 
-This template supports:
-- Basic movement (crouching, running, walking, looking with your mouse, etc)
-- Interactions
+This template contains:
+- Player controller with basic movement (crouching, running, walking, looking with your mouse, etc)
+- Interactions (Interactibles3D)
 - Basic pause menu
-- that's it
+- Basic main menu
+- Debug information menu (sort of)
+- that's about it
+
+This template contains really basic stuff you'd want for a first person 3d game (probably). 
+
+## Getting Started
+
+Delete /test_scene_assets/ and TestPlace node in the main scene, and you're good to go. 
+
+Documentation is located in the scripts themselves and in that "Search Help" button on top of your script IDE thing.
 
 ![God of the worlds, 2024 AD](test_scene_assets/cat_screenshot.jpg)
-
-This template contains all of the basic stuff you'd want for a first person game (probably)
-
-If you want to use this template, delete the test scene node, and the test scene assets. They are not nessesary for this template to work. Why would you keep them in anyway?
-
-Read the internal documentation (that "Search Help" button on your script IDE window thing) or the scripts themselves for more information.

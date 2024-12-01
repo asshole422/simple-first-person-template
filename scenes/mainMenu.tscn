@@ -1,0 +1,194 @@
+[gd_scene load_steps=3 format=3 uid="uid://ee6lb27nmpu1"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_2s5sd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrvy0"]
+bg_color = Color(0.2484, 0.2484, 0.2484, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2s5sd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -157.0
+offset_right = 112.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "my awesome game"
+
+[node name="Label2" type="Label" parent="Label"]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 24.0
+offset_right = 224.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.934358, 0.934358, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 24
+text = "DELUXE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 300.0
+offset_right = 688.0
+offset_bottom = 482.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit to desktop"
+
+[node name="Settings" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -72.0
+offset_right = 110.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vrvy0")
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -107.0
+offset_top = 6.0
+offset_right = 31.0
+offset_bottom = 29.0
+grow_horizontal = 2
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="Settings"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -107.0
+offset_top = 30.0
+offset_right = 107.0
+offset_bottom = 34.0
+grow_horizontal = 2
+
+[node name="OptionButton" type="OptionButton" parent="Settings"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 37.5
+offset_right = 214.0
+offset_bottom = 63.5
+theme_override_font_sizes/font_size = 13
+selected = 2
+item_count = 4
+popup/item_0/text = "1920x1080"
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "1152x648"
+popup/item_2/id = 2
+popup/item_3/text = "640x360"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="Settings/OptionButton"]
+layout_mode = 0
+offset_left = -109.0
+offset_top = 2.0
+offset_right = -26.0
+offset_bottom = 25.0
+text = "Resolution"
+
+[node name="CheckBox" type="CheckBox" parent="Settings"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 72.5
+offset_right = 216.0
+offset_bottom = 96.5
+
+[node name="Label" type="Label" parent="Settings/CheckBox"]
+layout_mode = 0
+offset_left = -186.0
+offset_top = -1.0
+offset_right = -103.0
+offset_bottom = 22.0
+text = "Fullscreen"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 103.5
+offset_right = 216.0
+offset_bottom = 127.5
+
+[node name="Label" type="Label" parent="Settings/CheckBox2"]
+layout_mode = 0
+offset_left = -186.0
+offset_top = -1.0
+offset_right = -103.0
+offset_bottom = 22.0
+text = "VSync"
+
+[node name="Button" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 213.0
+offset_right = 217.0
+offset_bottom = 246.0
+text = "Apply"
+
+[node name="Button2" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 2.5
+offset_right = 219.0
+offset_bottom = 30.5
+theme_override_font_sizes/font_size = 14
+text = "X"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_play"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_settings"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_quit"]
+[connection signal="pressed" from="Settings/Button" to="." method="_on_apply_settings"]
+[connection signal="pressed" from="Settings/Button2" to="." method="_on_close_button"]

@@ -38,3 +38,6 @@ func _save_settings():
 	var file = FileAccess.open(SETTINGS_FILE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(SettingsDict))
 	return
+
+func _get_resolution_as_str():
+	return str(SettingsDict.resolution[0]) + "x" + str(SettingsDict.resolution[1])

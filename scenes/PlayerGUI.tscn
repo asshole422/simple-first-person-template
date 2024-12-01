@@ -204,6 +204,10 @@ text = "Continue"
 layout_mode = 2
 text = "Settings"
 
+[node name="Button3" type="Button" parent="PauseNode/Main/VBoxContainer"]
+layout_mode = 2
+text = "Exit to menu"
+
 [node name="Button4" type="Button" parent="PauseNode/Main/VBoxContainer"]
 layout_mode = 2
 text = "Exit to desktop"
@@ -219,4 +223,5 @@ text = "hi"
 [connection signal="pressed" from="PauseNode/Settings/Button2" to="PauseNode" method="_on_close_button"]
 [connection signal="pressed" from="PauseNode/Main/VBoxContainer/Button" to="PauseNode" method="_unpause"]
 [connection signal="pressed" from="PauseNode/Main/VBoxContainer/Button2" to="PauseNode" method="_settings"]
+[connection signal="pressed" from="PauseNode/Main/VBoxContainer/Button3" to="PauseNode" method="_quit"]
 [connection signal="pressed" from="PauseNode/Main/VBoxContainer/Button4" to="PauseNode" method="_actually_quit"]
