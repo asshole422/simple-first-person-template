@@ -14,6 +14,17 @@ func _ready():
 ## Applies settings from SettingsDict
 func _apply_settings():
 	DisplayServer.window_set_size(Vector2(SettingsDict.resolution[0], SettingsDict.resolution[1]))
+	
+	# Center the window
+	var window_size = DisplayServer.window_get_size()
+	var screen_size = DisplayServer.screen_get_size()
+
+	var window_pos = Vector2.ZERO
+	window_pos.x = screen_size.x / 2 - window_size.x / 2
+	window_pos.y = screen_size.y / 2 - window_size.y / 2
+	
+	DisplayServer.window_set_position(window_pos)
+	
 	if SettingsDict.fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
 	else:
