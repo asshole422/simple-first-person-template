@@ -10,7 +10,7 @@ This template contains:
 - Debug information menu (sort of)
 - that's about it
 
-This template contains really basic stuff you'd want for a first person 3d game (probably). 
+In theory, should work for all Godot 4.x versions.
 
 ## Getting Started
 
