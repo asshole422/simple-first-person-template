@@ -5,11 +5,18 @@ extends Node
 var SettingsDict : Dictionary
 
 const SETTINGS_FILE_PATH = "user://settings.sav"
-const DEFAULT_SETTINGS = {"resolution": [1152, 648], "vsync": true, "fullscreen": false} # Settings that are set by default, in case if settings file does not exist
+const DEFAULT_SETTINGS = {"resolution": [1152, 648], "vsync": true, "fullscreen": false, "volume" : 1} # Settings that are set by default, in case if settings file does not exist
 
 func _ready():
 	await _load_settings()
 	_apply_settings()
+
+## Gets a value from SettingsDict. If it doesn't exist, it takes one from DEFAULT_SETTINGS.
+## It's recommended to use this instead of reading data from SettingsDict directly, since it has a fallback in form of DEFAULT_SETTINGS.
+func get_value(value_key : String):
+	if not value_key in SettingsDict:
+		return DEFAULT_SETTINGS[value_key]
+	return SettingsDict[value_key]
 
 ## Applies settings from SettingsDict
 func _apply_settings():
@@ -34,6 +41,8 @@ func _apply_settings():
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(get_value("volume")))
 
 ## Loads settings from settings file
 func _load_settings():
